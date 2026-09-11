@@ -1,6 +1,7 @@
 import aboutHeroBg from "../assets/heroes/about-hero.jpg";
 import React from "react";
 import { AboutSection } from "../components/AboutSection";
+import { HeroBackgroundVideo } from "../components/HeroBackgroundVideo";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { TrustStats } from "../components/TrustStats";
 import { PageType } from "../types";
@@ -37,20 +38,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenConsulta
             className="absolute inset-0 w-full h-full object-cover object-center animate-hero-zoom opacity-30 filter brightness-105 contrast-105"
             referrerPolicy="no-referrer"
           />
-          <video
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-35"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
+          <HeroBackgroundVideo
             poster={aboutHeroBg}
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <source src="/assets/videos/about-hero-bg.webm" type="video/webm" />
-            <source src="/assets/videos/about-hero-bg.mp4" type="video/mp4" />
-          </video>
+            webmSrc="/assets/videos/about-hero-bg.webm"
+            mp4Src="/assets/videos/about-hero-bg.mp4"
+            opacity={0.35}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-[#FAF9F5]/75 to-[#FAF9F5]/95" />
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-transparent to-white/90" />
         </div>

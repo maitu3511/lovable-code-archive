@@ -17,6 +17,7 @@ import {
   MousePointerClick,
 } from "lucide-react";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 import { AGENCY_CONFIG } from "../data/agencyData";
 import { getWhatsAppUrl } from "../utils/whatsapp";
 
@@ -96,20 +97,11 @@ export const Hero: React.FC<HeroProps> = ({
           referrerPolicy="no-referrer"
         />
         {/* Premium cinematic background video */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <HeroBackgroundVideo
           poster={heroBg}
-          aria-hidden="true"
-          tabIndex={-1}
-        >
-          <source src="/assets/videos/hero-bg.webm" type="video/webm" />
-          <source src="/assets/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
+          webmSrc="/assets/videos/hero-bg.webm"
+          mp4Src="/assets/videos/hero-bg.mp4"
+        />
         {/* Soft, luminous white-gold gradient overlays for high topic visibility and pristine typography readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5]/92 via-[#FAF9F5]/82 to-[#FAF9F5]/96" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5]/90 via-[#FAF9F5]/30 to-[#FAF9F5]/90" />
