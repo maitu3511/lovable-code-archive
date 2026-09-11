@@ -7,8 +7,10 @@ interface HeroBackgroundVideoProps {
   webmSrc: string;
   /** Public path to the mp4 source */
   mp4Src: string;
-  /** Extra classes for the <video> element (opacity, blend, etc.) */
+  /** Extra classes for the <video> element */
   className?: string;
+  /** Final opacity once the video is playing (0-1) */
+  opacity?: number;
 }
 
 /**
@@ -23,6 +25,7 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
   webmSrc,
   mp4Src,
   className = "",
+  opacity = 1,
 }) => {
   const [enabled, setEnabled] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -63,9 +66,8 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
   return (
     <video
       ref={videoRef}
-      className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
-        ready ? "opacity-100" : "opacity-0"
-      } ${className}`}
+      className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${className}`}
+      style={{ opacity: ready ? opacity : 0 }}
       autoPlay
       muted
       loop
