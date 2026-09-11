@@ -1,6 +1,7 @@
 import aboutHeroBg from "../assets/heroes/about-hero.jpg";
 import React from "react";
 import { AboutSection } from "../components/AboutSection";
+import { HeroBackgroundVideo } from "../components/HeroBackgroundVideo";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { TrustStats } from "../components/TrustStats";
 import { PageType } from "../types";
@@ -37,20 +38,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenConsulta
             className="absolute inset-0 w-full h-full object-cover object-center animate-hero-zoom opacity-30 filter brightness-105 contrast-105"
             referrerPolicy="no-referrer"
           />
-          <video
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-35"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
+          <HeroBackgroundVideo
             poster={aboutHeroBg}
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <source src="/assets/videos/about-hero-bg.webm" type="video/webm" />
-            <source src="/assets/videos/about-hero-bg.mp4" type="video/mp4" />
-          </video>
+            webmSrc="/assets/videos/about-hero-bg.webm"
+            mp4Src="/assets/videos/about-hero-bg.mp4"
+            opacity={0.35}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-[#FAF9F5]/75 to-[#FAF9F5]/95" />
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-transparent to-white/90" />
         </div>
@@ -60,17 +53,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenConsulta
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-[#D4AF37]/18 rounded-full blur-[100px] pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/95 border border-[#E8E1D0] text-[#9A7B16] text-xs font-bold uppercase tracking-widest mb-4 font-heading shadow-xs backdrop-blur-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/95 border border-[#E8E1D0] text-[#9A7B16] text-xs font-bold uppercase tracking-widest mb-4 font-heading shadow-xs backdrop-blur-xs motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:duration-700">
             <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span>Agency Profile & Lineage</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111111] font-heading tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111111] font-heading tracking-tight motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700 motion-safe:delay-100 motion-safe:fill-mode-backwards">
             About{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9A7B16] via-[#D4AF37] to-[#C9A227] italic font-serif">
               Digibasera
             </span>
           </h1>
-          <p className="text-base sm:text-lg text-[#444444] mt-3 max-w-3xl leading-relaxed font-medium">
+          <p className="text-base sm:text-lg text-[#444444] mt-3 max-w-3xl leading-relaxed font-medium motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700 motion-safe:delay-200 motion-safe:fill-mode-backwards">
             A full-service Digital Marketing, Technology & Strategy Agency committed to turning
             digital ideas into measurable commercial pipeline and enterprise value.
           </p>
