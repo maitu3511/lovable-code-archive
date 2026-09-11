@@ -77,21 +77,62 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "DigiBasera | Best Digital Marketing Agency & Web Development in Rajkot, Gujarat" },
+      {
+        name: "description",
+        content:
+          "DigiBasera is Rajkot's leading digital marketing agency & web development company. We deliver ROI-driven SEO services, Google Ads PPC management, high-performance website design, Shopify e-commerce, and social media marketing across Gujarat and India.",
+      },
+      {
+        name: "keywords",
+        content:
+          "digital marketing agency in rajkot, best seo company gujarat, web development company in rajkot, website design rajkot, google ads agency rajkot, social media marketing gujarat, digital marketing company rajkot, ecommerce website development rajkot, local seo services saurashtra, ppc management company gujarat",
+      },
+      { name: "author", content: "DigiBasera - Digital Marketing & Technology Agency" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "geo.region", content: "IN-GJ" },
+      { name: "geo.placename", content: "Rajkot" },
+      { name: "geo.position", content: "22.2858;70.7850" },
+      { name: "ICBM", content: "22.2858, 70.7850" },
+      { property: "og:title", content: "DigiBasera | Best Digital Marketing Agency & Web Development in Rajkot" },
+      {
+        property: "og:description",
+        content:
+          "Top-rated digital marketing agency in Rajkot, Gujarat. SEO, Google Ads PPC, custom web development, and social media marketing engineered for measurable revenue growth.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_IN" },
+      { property: "og:url", content: "https://digibasera.com" },
+      { property: "og:site_name", content: "DigiBasera" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "DigiBasera | Digital Marketing & Web Agency in Rajkot" },
+      {
+        name: "twitter:description",
+        content:
+          "Scale your brand with Rajkot's premier digital marketing agency. SEO, Google Ads, website design, and e-commerce solutions.",
+      },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "preload",
+        href: "/fonts/Fonarto.ttf",
+        as: "font",
+        type: "font/ttf",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap",
+      },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "64x64" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
   shellComponent: RootShell,

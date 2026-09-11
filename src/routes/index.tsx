@@ -1,24 +1,66 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import SiteApp from "../SiteApp";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      {
+        title: "DigiBasera | Top Digital Marketing Agency & Web Development in Rajkot, Gujarat",
+      },
+      {
+        name: "description",
+        content:
+          "DigiBasera is a premier digital marketing & web technology agency in Rajkot, Gujarat. SEO, Google Ads PPC, custom web design, e-commerce and social media marketing.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Digital Marketing Agency Rajkot, Best SEO Company Gujarat, Web Development Agency Rajkot, Social Media Marketing Gujarat, Google Ads PPC Management",
+      },
+      {
+        property: "og:title",
+        content: "DigiBasera | Premier Digital Marketing Agency & Custom Web Development",
+      },
+      {
+        property: "og:description",
+        content:
+          "Commercial portfolio & live client showcase: live websites, high-converting social media creatives, and verified ROI case studies.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://digibasera.com/" },
+      {
+        property: "og:image",
+        content:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "DigiBasera | Premier Digital Marketing & Web Agency",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore live client websites, high-engagement social media campaigns, and verified SEO results from DigiBasera in Rajkot, Gujarat.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      },
+      { name: "geo.region", content: "IN-GJ" },
+      { name: "geo.placename", content: "Rajkot, Gujarat, India" },
+      { name: "geo.position", content: "22.3039;70.8022" },
+    ],
+    links: [{ rel: "canonical", href: "https://digibasera.com/" }],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <ClientOnly fallback={<div className="min-h-screen bg-white" />}>
+      <SiteApp />
+    </ClientOnly>
   );
 }
