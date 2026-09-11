@@ -3,7 +3,7 @@ import SiteApp from "../../SiteApp";
 import { getServiceRoute, getServiceCanonical } from "../../data/serviceRoutes";
 
 export const Route = createFileRoute("/services/$slug")({
-  beforeLoad: ({ params }) => {
+  loader: ({ params }) => {
     const service = getServiceRoute(params.slug);
     if (!service) throw notFound();
     return { service };
