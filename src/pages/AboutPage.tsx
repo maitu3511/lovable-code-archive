@@ -5,8 +5,7 @@ import { HeroBackgroundVideo } from "../components/HeroBackgroundVideo";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { TrustStats } from "../components/TrustStats";
 import { PageType } from "../types";
-import founderFirasatAsset from "../assets/founder-firasat-ali-new.png.asset.json";
-const founderFirasatPortrait = founderFirasatAsset.url;
+import founderFirasatPortrait from "../assets/founder-photo-new.png";
 import {
   Award,
   Sparkles,
