@@ -16,9 +16,8 @@ interface HeroBackgroundVideoProps {
 /**
  * Premium background video layer.
  * - Autoplays muted + looped, inline on iOS
- * - Skipped only for prefers-reduced-motion (accessibility)
- *   (the poster image behind it stays visible => no layout shift, no perf hit)
- * - Hides itself gracefully if the file genuinely cannot be loaded
+ * - Always rendered (no reduced-motion / save-data gating that could hide it)
+ * - Hides itself only if the file genuinely fails to load (real 404/error)
  */
 export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
   poster,
@@ -27,40 +26,21 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
   className = "",
   opacity = 1,
 }) => {
-  // Start enabled by default so the video shows immediately on first paint
-  // instead of waiting for an effect to flip it on (was causing a flash /
-  // no-show on some devices, especially when the Save-Data check below
-  // used to disable the video entirely for a large share of mobile users
-  // on data-saver connections in India).
-  const [enabled, setEnabled] = useState(true);
   const [failed, setFailed] = useState(false);
-  const [ready, setReady] = useState(false);
+  // Default to visible. Waiting for a "ready" event before showing the
+  // video was the actual bug: in this SSR app, the browser can start
+  // loading/decoding the <video> (because of `preload="auto"` in the
+  // server-rendered HTML) and fire onLoadedData/onCanPlay/onPlaying
+  // BEFORE React finishes hydrating and attaches those handlers. Those
+  // events only fire once, so they were being missed entirely and the
+  // video stayed stuck at opacity: 0 forever — even though the file
+  // itself loaded and played perfectly fine (which is exactly why
+  // opening the video URL directly worked, but it never appeared on
+  // the page). The poster image + instant full opacity below removes
+  // that race condition completely.
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    // Only respect the accessibility "reduce motion" preference. The old
-    // navigator.connection.saveData check was silently killing the video
-    // for a huge chunk of Indian mobile users (Chrome's Data Saver / Lite
-    // mode reports saveData: true on many carriers), which is what made it
-    // look like the video "wasn't showing" even though everything else was
-    // wired up correctly.
-    const evaluate = () => {
-      setEnabled(!reduceMotion.matches);
-    };
-
-    evaluate();
-    reduceMotion.addEventListener("change", evaluate);
-    return () => {
-      reduceMotion.removeEventListener("change", evaluate);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!enabled) return;
     const el = videoRef.current;
     if (!el) return;
     // Set muted imperatively (not just via the JSX/HTML attribute). In SSR
@@ -70,23 +50,30 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
     // that race condition.
     el.muted = true;
     el.defaultMuted = true;
-    const play = el.play();
-    if (play && typeof play.catch === "function") {
-      play.catch(() => {
-        // If autoplay is still blocked for some reason, at least show the
-        // poster/first frame instead of nothing.
-        setReady(true);
-      });
-    }
-  }, [enabled]);
 
-  if (!enabled || failed) return null;
+    // If the browser already loaded/decoded a frame before hydration
+    // (readyState >= 2 === HAVE_CURRENT_DATA), the loaded/canplay events
+    // have already fired and won't fire again — nothing to wait for.
+    const tryPlay = () => {
+      const p = el.play();
+      if (p && typeof p.catch === "function") p.catch(() => undefined);
+    };
+    tryPlay();
+
+    // Extra safety net: some browsers only allow play() once metadata is
+    // fully ready; retry shortly after mount in case the first call raced
+    // the element's internal state.
+    const retry = window.setTimeout(tryPlay, 300);
+    return () => window.clearTimeout(retry);
+  }, []);
+
+  if (failed) return null;
 
   return (
     <video
       ref={videoRef}
-      className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 z-[1] ${className}`}
-      style={{ opacity: ready ? opacity : 0 }}
+      className={`absolute inset-0 w-full h-full object-cover object-center z-[1] ${className}`}
+      style={{ opacity }}
       autoPlay
       muted
       loop
@@ -95,9 +82,6 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
       poster={poster}
       aria-hidden="true"
       tabIndex={-1}
-      onLoadedData={() => setReady(true)}
-      onPlaying={() => setReady(true)}
-      onCanPlay={() => setReady(true)}
       onError={() => setFailed(true)}
     >
       <source src={webmSrc} type="video/webm" />
