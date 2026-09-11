@@ -1,6 +1,6 @@
 import React from "react";
 import { Send, PhoneCall, Sparkles, CheckCircle2 } from "lucide-react";
-import founderFirasatAsset from "../assets/founder-firasat-ali-new.png.asset.json";
+import founderPhotoNew from "../assets/founder-photo-new.png";
 import { AGENCY_CONFIG } from "../data/agencyData";
 import { PageType } from "../types";
 import { ScrollReveal } from "./motion/MotionReveal";
@@ -322,7 +322,7 @@ export const IsBusinessReadySection: React.FC<IsBusinessReadySectionProps> = ({
           >
             <div className="relative flex justify-center items-end group">
               <motion.img
-                src={founderFirasatAsset.url}
+                src={founderPhotoNew}
                 alt="Firasat Ali - Founder & Chief Strategist, Digibasera"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -355,3 +355,4 @@ export const IsBusinessReadySection: React.FC<IsBusinessReadySectionProps> = ({
     </section>
   );
 };
+
