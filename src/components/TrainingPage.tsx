@@ -1,4 +1,4 @@
-import certificateSampleAsset from "../assets/training-certificate.webp.asset.json";
+import certificateSampleImg from "../assets/certificate-photo-new.webp";
 import trainingHeroBg from "../assets/heroes/training-hero.jpg";
 import React, { useState } from "react";
 import {
@@ -746,7 +746,7 @@ export const TrainingPage: React.FC<TrainingPageProps> = ({
             <div className="lg:col-span-5">
               <div className="p-4 sm:p-5 rounded-xl bg-white border-2 border-[#D4AF37] shadow-2xl relative text-[#111111]">
                 <img
-                  src={certificateSampleAsset.url}
+                  src={certificateSampleImg}
                   alt="Sample 90-day digital marketing course completion certificate issued in association with Zinmatt"
                   className="w-full h-auto rounded-lg border border-[#E8E1D0]"
                   width={1200}
