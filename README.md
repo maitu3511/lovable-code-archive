@@ -1,48 +1,45 @@
-DigiBasera - Hero Background Video Fix
-========================================
+DigiBasera - Founder Photo + Certificate Image Update
+========================================================
 
-Sirf 2 files change hue hain (poori repo nahi):
+Ye 5 files change/add hui hain:
 
-1. src/components/HeroBackgroundVideo.tsx
-   -> Yahi component Home page aur About page dono ke hero section
-      ka background video render karta hai, isliye issi ek file ko
-      fix karne se dono jagah theek ho jayega.
+1. src/assets/founder-photo-new.png  (NAYI FILE)
+   -> Aapki di hui founder photo.
 
-   Kya bug tha:
-   a) Component "Save-Data" connection check ki wajah se bohot saare
-      mobile users (jinke Chrome mein Data Saver / Lite mode on hota
-      hai — India mein bahut common hai) ke liye video ko completely
-      disable kar deta tha, sirf poster image dikhta tha. Ye check
-      hata diya hai, ab sirf accessibility "reduce motion" setting
-      respect hoti hai.
-   b) Video ka "muted" sirf React/HTML attribute se set ho raha tha.
-      SSR (server-side rendered) app mein hydration se pehle browser
-      autoplay ko block kar sakta hai kyunki us time tak video
-      "muted" property JS mein set nahi hoti. Ab ye imperatively
-      (ref ke through) set kiya ja raha hai, jisse autoplay reliably
-      chalu ho.
-   c) Video element ko explicit z-index (z-[1]) diya hai taaki wo
-      hamesha fallback poster image ke upar hi render ho.
+2. src/assets/certificate-photo-new.webp  (NAYI FILE)
+   -> Aapki di hui certificate image.
 
-2. netlify.toml
-   -> Static assets (videos/images/fonts) ke liye explicit pass-through
-      redirect rules add ki hain, jo catch-all SPA fallback
-      ("/*" -> "/index.html") se PEHLE aati hain. Pehle sirf ek hi
-      blanket "/*" redirect tha jo kuch hosting setups (jaise Cloudflare
-      Workers/nitro build) par video/image files ko bhi index.html
-      par redirect kar sakta tha, jisse video load hi nahi hota tha.
+3. src/pages/AboutPage.tsx
+   -> About page ke "Leadership & Core Team" section mein founder
+      ki photo ab nayi image use karti hai.
+
+4. src/components/IsBusinessReadySection.tsx
+   -> Home page ke "Is Your Business Ready" section mein founder
+      ki photo (right side laptop wali) bhi ab nayi image use karti hai.
+
+      NOTE: Ye section originally ek "cutout" (transparent background)
+      style image ke liye design kiya gaya tha (jisme sirf person
+      dikhta hai, background nahi, jaise floating cutout). Aapki di
+      hui photo ek normal office photo hai (background ke saath),
+      isliye ye ab ek chhoti rectangular photo ki tarah dikhegi,
+      floating cutout jaisi nahi. Agar aapko wahi transparent
+      "cutout" wala look chahiye, to photo ka background hataake
+      (transparent PNG banake) bhejna hoga, main use update kar dunga.
+
+5. src/components/TrainingPage.tsx
+   -> Training/Education page ke "Certification" section mein
+      sample certificate ki image ab aapki di hui certificate
+      image use karti hai.
 
 Kaise apply karein
 -------------------
 1. Apne repo ko clone/pull karein.
 2. Is zip ke "src" folder ko apni repo ke "src" folder ke upar paste
-   kar dein (overwrite karne do jab pucha jaye), aur "netlify.toml"
-   ko bhi apni repo ke root mein overwrite kar dein.
+   kar dein (overwrite karne do jab pucha jaye).
 3. Commit + push karein:
    git add .
-   git commit -m "Fix hero background video not showing on Home/About pages"
+   git commit -m "Update founder photo and certificate sample image"
    git push
 
-Verified: npm install + npm run build (npx vite build) successfully
-pass with these changes.
+Verified: npm install + npm run build successfully pass with these changes.
 
