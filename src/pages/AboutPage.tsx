@@ -42,10 +42,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenConsulta
             poster={aboutHeroBg}
             webmSrc="/assets/videos/about-hero-bg.webm"
             mp4Src="/assets/videos/about-hero-bg.mp4"
-            opacity={0.35}
+            opacity={0.85}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-[#FAF9F5]/75 to-[#FAF9F5]/95" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-transparent to-white/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-[#FAF9F5]/55 to-[#FAF9F5]/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-transparent to-white/70" />
         </div>
 
 

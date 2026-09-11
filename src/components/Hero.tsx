@@ -103,8 +103,8 @@ export const Hero: React.FC<HeroProps> = ({
           mp4Src="/assets/videos/hero-bg.mp4"
         />
         {/* Soft, luminous white-gold gradient overlays for high topic visibility and pristine typography readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5]/92 via-[#FAF9F5]/82 to-[#FAF9F5]/96" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5]/90 via-[#FAF9F5]/30 to-[#FAF9F5]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5]/70 via-[#FAF9F5]/50 to-[#FAF9F5]/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5]/70 via-[#FAF9F5]/10 to-[#FAF9F5]/70" />
       </div>
 
 

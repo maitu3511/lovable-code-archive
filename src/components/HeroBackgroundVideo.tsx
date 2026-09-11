@@ -36,20 +36,17 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
     if (typeof window === "undefined") return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const smallScreen = window.matchMedia("(max-width: 767px)");
     const connection = (navigator as unknown as { connection?: { saveData?: boolean } })
       .connection;
 
     const evaluate = () => {
-      setEnabled(!reduceMotion.matches && !smallScreen.matches && !connection?.saveData);
+      setEnabled(!reduceMotion.matches && !connection?.saveData);
     };
 
     evaluate();
     reduceMotion.addEventListener("change", evaluate);
-    smallScreen.addEventListener("change", evaluate);
     return () => {
       reduceMotion.removeEventListener("change", evaluate);
-      smallScreen.removeEventListener("change", evaluate);
     };
   }, []);
 
@@ -72,10 +69,12 @@ export const HeroBackgroundVideo: React.FC<HeroBackgroundVideoProps> = ({
       muted
       loop
       playsInline
-      preload="none"
+      preload="auto"
       poster={poster}
       aria-hidden="true"
       tabIndex={-1}
+      onLoadedData={() => setReady(true)}
+      onPlaying={() => setReady(true)}
       onCanPlay={() => setReady(true)}
       onError={() => setFailed(true)}
     >
